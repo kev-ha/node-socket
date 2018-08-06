@@ -27,3 +27,14 @@ client.on('close', () => {
 client.on('error', err => {
     console.error(err);
 });
+
+var counter = 0
+const sendData = data => {
+  setTimeout(() => {
+    client.write(`send data:${data} counter:${counter}`)
+    counter++;
+    if (counter < 1000) sendData(`sending data to server`)
+  }, 1000)
+}
+
+sendData(`sending data to server`)
